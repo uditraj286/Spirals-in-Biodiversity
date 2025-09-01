@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patterns - Spirals in Biodiversity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        .spiral-bg {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #059669, #10b981, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .spiral-animation {
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .fibonacci-spiral {
+            background: conic-gradient(from 0deg, #10b981, #34d399, #6ee7b7, #a7f3d0, #d1fae5, #ecfdf5);
+            border-radius: 50%;
+            animation: spiral-grow 4s ease-in-out infinite alternate;
+        }
+        @keyframes spiral-grow {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(180deg); }
+        }
+        .pattern-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .interactive-card {
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .interactive-card:hover {
+            transform: scale(1.05) rotateY(5deg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .text-shadow-lg {
+            text-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="spiral-bg min-h-screen">
+    <nav class="glass-effect shadow-lg backdrop-blur-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex items-center space-x-4">
+                        <a href="index.html">
+                            <img class="h-12 w-auto" src="logo.png" alt="Logo">
+                        </a>
+                        <h1 class="text-green-600 text-3xl font-bold animate-pulse-slow" id="logo">Spirals in Biodiversity</h1>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-green-600 hover:text-green-600 px-3 py-2 rounded-md text-md font-medium transition-all duration-300 hover:bg-green-400 hover:scale-105">Home</a>
+                    <a href="research.html" class="text-green-600 hover:text-green-600 px-3 py-2 rounded-md text-md font-medium transition-all duration-300 hover:bg-green-400 hover:scale-105">Research</a>
+                    <a href="patterns.html" class="text-green-600 bg-green-400 px-3 py-2 rounded-md text-md font-medium transition-all duration-300 hover:bg-green-400 hover:scale-105">Patterns</a>
+                    <a href="gallery.html" class="text-green-600 hover:text-green-600 px-3 py-2 rounded-md text-md font-medium transition-all duration-300 hover:bg-green-400 hover:scale-105">Gallery</a>
+                    <a href="about.html" class="text-green-600 hover:text-green-600 px-3 py-2 rounded-md text-md font-medium transition-all duration-300 hover:bg-green-400 hover:scale-105">About</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section class="relative py-20 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-10 left-10 w-32 h-32 fibonacci-spiral opacity-20"></div>
+            <div class="absolute top-40 right-20 w-24 h-24 fibonacci-spiral opacity-15" style="animation-delay: -2s;"></div>
+            <div class="absolute bottom-20 left-1/4 w-20 h-20 fibonacci-spiral opacity-10" style="animation-delay: -4s;"></div>
+        </div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-6xl md:text-7xl font-bold mb-6 gradient-text text-shadow-lg">
+                Nature's Spiral Patterns
+            </h1>
+            <p class="text-2xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">
+                Explore the mathematical beauty hidden in the natural world. From microscopic DNA to vast galaxies, 
+                discover how spiral patterns shape biodiversity and create nature's most efficient designs.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <button onclick="scrollToSection('fibonacci')" class="bg-green-600 text-white px-8 py-3 rounded-full hover:bg-green-700 transition-all duration-300 hover:scale-105">
+                    Check Patterns
+                </button>
+                <button onclick="scrollToSection('interactive')" class="border-2 border-green-600 text-green-600 px-8 py-3 rounded-full hover:bg-green-600 hover:text-white transition-all duration-300 hover:scale-105">
+                    Generate Patterns
+                </button>
+            </div>
+        </div>
+    </section>
+    <section id="fibonacci" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold gradient-text mb-6">The Fibonacci Sequence in Nature</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    The Fibonacci sequence (1, 1, 2, 3, 5, 8, 13, 21...) appears throughout nature, 
+                    creating the most efficient and beautiful spiral patterns.
+                </p>
+            </div>
+            <div class="pattern-grid">
+                <div class="interactive-card bg-gradient-to-br from-yellow-100 to-orange-100 rounded-2xl p-8 shadow-lg">
+                    <div class="text-center mb-6">
+                        <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white text-2xl">
+                            🌻
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-800">Sunflower Spirals</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Sunflower seed arrangements follow Fibonacci spirals, typically with 21, 34, 55, or 89 spirals. 
+                        This pattern maximizes seed packing efficiency.
+                    </p>
+                    <div class="bg-white rounded-lg p-4">
+                        <h4 class="font-semibold text-green-700 mb-2">Mathematical Pattern:</h4>
+                        <p class="text-sm text-gray-600">F(n) = F(n-1) + F(n-2) where F(1) = 1, F(2) = 1</p>
+                    </div>
+                </div>
+                <div class="interactive-card bg-gradient-to-br from-brown-100 to-amber-100 rounded-2xl p-8 shadow-lg">
+                    <div class="text-center mb-6">
+                        <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-amber-600 to-brown-700 rounded-full flex items-center justify-center text-white text-2xl">
+                            🌲
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-800">Pinecone Spirals</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Pinecone scales are arranged in Fibonacci spirals, usually 8 and 13 or 5 and 8. 
+                        This creates optimal seed distribution patterns.
+                    </p>
+                    <div class="bg-white rounded-lg p-4">
+                        <h4 class="font-semibold text-green-700 mb-2">Common Ratios:</h4>
+                        <p class="text-sm text-gray-600">8:13, 5:8, 3:5 (approaching golden ratio)</p>
+                    </div>
+                </div>
+                <div class="interactive-card bg-gradient-to-br from-blue-100 to-cyan-100 rounded-2xl p-8 shadow-lg">
+                    <div class="text-center mb-6">
+                        <div class="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center text-white text-2xl">
+                            🐚
+                        </div>
+                        <h3 class="text-2xl font-bold text-green-800">Nautilus Shell</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        The nautilus shell grows in a logarithmic spiral, maintaining the golden ratio 
+                        throughout its development for optimal strength and space efficiency.
+                    </p>
+                    <div class="bg-white rounded-lg p-4">
+                        <h4 class="font-semibold text-green-700 mb-2">Golden Ratio:</h4>
+                        <p class="text-sm text-gray-600">φ ≈ 1.618033988749...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="interactive" class="py-16 bg-gradient-to-br from-green-50 to-blue-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold gradient-text mb-6">Interactive Spiral Generator</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Experiment with different spiral parameters and see how they relate to natural patterns.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-bold text-green-800 mb-4">Spiral Parameters</h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Number of Turns</label>
+                                <input type="range" id="turns" min="1" max="20" value="8" class="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between text-sm text-gray-500 mt-1">
+                                    <span>1</span>
+                                    <span id="turnsValue">8</span>
+                                    <span>20</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Growth Factor</label>
+                                <input type="range" id="growth" min="1" max="3" step="0.1" value="1.6" class="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between text-sm text-gray-500 mt-1">
+                                    <span>1.0</span>
+                                    <span id="growthValue">1.6</span>
+                                    <span>3.0</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Animation Speed</label>
+                                <input type="range" id="speed" min="1" max="10" value="5" class="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer">
+                                <div class="flex justify-between text-sm text-gray-500 mt-1">
+                                    <span>Slow</span>
+                                    <span id="speedValue">5</span>
+                                    <span>Fast</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="generateSpiral()" class="w-full mt-6 bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors duration-300">
+                            Generate Spiral
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-6 shadow-lg">
+                        <h4 class="text-lg font-semibold text-green-800 mb-3">Pattern Information</h4>
+                        <div id="patternInfo" class="text-sm text-gray-600 space-y-2">
+                            <p><strong>Type:</strong> <span id="spiralType">Fibonacci-like</span></p>
+                            <p><strong>Golden Ratio:</strong> <span id="goldenRatio">1.618</span></p>
+                            <p><strong>Efficiency:</strong> <span id="efficiency">Optimal</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold text-green-800 mb-6 text-center">Spiral Visualization</h3>
+                    <div id="spiralCanvas" class="w-full h-96 bg-gradient-to-br from-green-50 to-blue-50 rounded-lg border-2 border-dashed border-green-300 flex items-center justify-center">
+                        <canvas id="canvas" width="400" height="400" class="border border-gray-300 rounded"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold gradient-text mb-6">Mathematical Principles</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Understanding the mathematics behind spiral patterns reveals nature's optimization strategies.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 shadow-lg card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-2xl">
+                            φ
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-800 mb-4 text-center">Golden Ratio</h3>
+                    <p class="text-gray-700 text-center">
+                        The golden ratio (φ ≈ 1.618) creates the most aesthetically pleasing and efficient spiral patterns.
+                    </p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 shadow-lg card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center text-white text-2xl">
+                            π
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-800 mb-4 text-center">Logarithmic Spirals</h3>
+                    <p class="text-gray-700 text-center">
+                        Logarithmic spirals maintain constant angles, creating efficient growth patterns in nature.
+                    </p>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-8 shadow-lg card-hover">
+                    <div class="text-center mb-6">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white text-2xl">
+                            F
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-green-800 mb-4 text-center">Fibonacci Sequence</h3>
+                    <p class="text-gray-700 text-center">
+                        The Fibonacci sequence creates optimal packing arrangements for seeds and structures.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function generateSpiral() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const turns = parseInt(document.getElementById('turns').value);
+            const growth = parseFloat(document.getElementById('growth').value);
+            const speed = parseInt(document.getElementById('speed').value);
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const maxRadius = Math.min(centerX, centerY) - 20;
+
+            ctx.beginPath();
+            ctx.strokeStyle = '#059669';
+            ctx.lineWidth = 3;
+
+            for (let i = 0; i <= turns * 2 * Math.PI; i += 0.1) {
+                const radius = (i / (2 * Math.PI)) * growth * 10;
+                if (radius > maxRadius) break;
+                
+                const x = centerX + radius * Math.cos(i);
+                const y = centerY + radius * Math.sin(i);
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+
+            ctx.stroke();
+
+            ctx.fillStyle = '#10b981';
+            for (let i = 1; i <= Math.min(turns, 8); i++) {
+                const angle = i * 2 * Math.PI / growth;
+                const radius = i * 15;
+                const x = centerX + radius * Math.cos(angle);
+                const y = centerY + radius * Math.sin(angle);
+                
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, 2 * Math.PI);
+                ctx.fill();
+            }
+
+            updatePatternInfo(turns, growth);
+        }
+
+        function updatePatternInfo(turns, growth) {
+            const spiralType = growth > 1.5 && growth < 1.7 ? 'Golden Ratio' : 
+                              growth < 1.2 ? 'Tight Spiral' : 'Expanding Spiral';
+            
+            document.getElementById('spiralType').textContent = spiralType;
+            document.getElementById('goldenRatio').textContent = growth.toFixed(3);
+            document.getElementById('efficiency').textContent = 
+                Math.abs(growth - 1.618) < 0.1 ? 'Optimal' : 'Good';
+        }
+
+        document.getElementById('turns').addEventListener('input', function() {
+            document.getElementById('turnsValue').textContent = this.value;
+        });
+
+        document.getElementById('growth').addEventListener('input', function() {
+            document.getElementById('growthValue').textContent = this.value;
+        });
+
+        document.getElementById('speed').addEventListener('input', function() {
+            document.getElementById('speedValue').textContent = this.value;
+        });
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        window.addEventListener('load', function() {
+            generateSpiral();
+        });
+    </script>
+</body>
+</html>
